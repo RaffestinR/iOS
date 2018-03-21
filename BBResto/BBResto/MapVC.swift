@@ -57,7 +57,7 @@ class MapVC: UIViewController {
         print("")
         
         
-        let camera = GMSCameraPosition.camera(withLatitude: latValue!, longitude: longValue!, zoom: 18.0)
+        let camera = GMSCameraPosition.camera(withLatitude: markLati!, longitude: markLong!, zoom: 18.0)
         let mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
         mapView.camera = camera
         print("cemara : \(myResto)")
@@ -65,18 +65,29 @@ class MapVC: UIViewController {
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         view = mapView
+        
+        
         let marker = GMSMarker()
         print("marker pos : \(camera.target)")
         print("")
         marker.position = camera.target
         marker.title = myResto!
-        //marker.snippet = "San Francisco"
+        marker.snippet = "Ceci  est un test"
         marker.map = mapView
         
         
+        let marker2 = GMSMarker()
+        let camera2 = GMSCameraPosition.camera(withLatitude: latValue!, longitude: longValue!, zoom: 18.0)
+        print("nous pos : \(camera2.target)")
+        print("")
+        marker2.position = camera2.target
+        marker2.title = "I'm here"
         
+        marker2.map = mapView
+       
         
-        //showMarker(position: camera.target,GMSMapView: mapView)
+ 
+ //showMarker(position: camera.target,GMSMapView: mapView)
     }
     
   /*  func showMarker(position: CLLocationCoordinate2D,GMSMapView: mapView){
