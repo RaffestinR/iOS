@@ -1,0 +1,25 @@
+PODS:
+  - Alamofire (4.7.1)
+  - GoogleMaps (2.6.0):
+    - GoogleMaps/Maps (= 2.6.0)
+  - GoogleMaps/Base (2.6.0)
+  - GoogleMaps/Maps (2.6.0):
+    - GoogleMaps/Base
+  - SwiftyJSON (4.0.0)
+  - SwiftyStarRatingView (1.0.4)
+
+DEPENDENCIES:
+  - Alamofire
+  - GoogleMaps
+  - SwiftyJSON
+  - SwiftyStarRatingView
+
+SPEC CHECKSUMS:
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SwiftyStarRatingView: a2b0057700e0adeb8e7442c55d99cb53b531d2f4
+
+PODFILE CHECKSUM: efe2423a089c19d99d61563421f42747083b8624
+
+COCOAPODS: 1.4.0

@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/specs.git'
+
+project '/Users/tp/Documents/tpios/BBResto/BBResto.xcodeproj'
+target 'BBResto' do
+
+  use_frameworks!
+
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'SwiftyStarRatingView'
+  pod 'GoogleMaps'
+end
