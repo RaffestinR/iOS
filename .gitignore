@@ -16,6 +16,9 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+BBResto/BBResto/BBresto.xcworkspace/*
+BBResto/BBresto/.DS_Store
+.DS_Store
 
 ## Other
 *.moved-aside

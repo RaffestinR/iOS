@@ -27,8 +27,15 @@ class MapVC: UIViewController {
     var markLati:Double!
     var markLong:Double!
     
-    //var mapView: GMSMapView!
     
+    let polyline = GMSPolyline()
+    
+    let appKey = AppDelegate().appKey
+    //var mapView: GMSMapView!
+    enum JSONError: String, Error {
+        case NoData = "ERROR: no data"
+        case ConversionFailed = "ERROR: conversion from JSON failed"
+    }
 
     
     override func viewDidLoad() {
@@ -85,8 +92,70 @@ class MapVC: UIViewController {
         
         marker2.map = mapView
        
+        let urlString = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=\(camera2.target)&destinations=\(camera.target)&key=\(appKey)"
+        Alamofire.request(urlString!).responseJSON { (response) in
+            print("je suis dans alamofire")
+            if response.result.isSuccess {
+                print("je suis dans response succes")
+                let contenuJSON : JSON = JSON(response.result.value!)
+                self.contenu = self.lesCategories(contenuJSON)
+                self.maTable.reloadData()
+                print("résult value : \(response.result.value!)")
+            }else{
+                print("Erreur : \(response.result.error!)")
+            }
+        }
+        /*
+        guard let url = URL(string: urlString) else {
+            print("Error: cannot create URL")
+            return
+        }
+        let urlRequest = URLRequest(url: url)
         
- 
+        // set up the session
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        // make the request
+        let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
+            
+            do {
+                guard let data = data else {
+                    throw JSONError.NoData
+                }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary else {
+                    throw JSONError.ConversionFailed
+                }
+                print(json)
+            } catch let error as JSONError {
+                print(error.rawValue)
+            } catch let error as NSError {
+                print(error.debugDescription)
+            }
+            
+        })
+        task.resume()
+        
+        if let array = json["routes"] as? NSArray {
+            if let routes = array[0] as? NSDictionary{
+                if let overview_polyline = routes["overview_polyline"] as? NSDictionary{
+                    if let points = overview_polyline["points"] as? String{
+                        print(points)
+                        // Use DispatchQueue.main for main thread for handling UI
+                        DispatchQueue.main.async {
+                            // show polyline
+                            let path = GMSPath(fromEncodedPath:points)
+                            self.polyline.path = path
+                            self.polyline.strokeWidth = 4
+                            self.polyline.strokeColor = UIColor.init(hue: 210, saturation: 88, brightness: 84, alpha: 1)
+                            self.polyline.map = self.mapView
+                        }
+                    }
+                }
+            }
+        }
+        */
+        
  //showMarker(position: camera.target,GMSMapView: mapView)
     }
     
