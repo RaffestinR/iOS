@@ -10,6 +10,7 @@
 import UIKit
 import GoogleMaps
 import SwiftyJSON
+import Alamofire
 
 class MapVC: UIViewController {
     
@@ -92,14 +93,14 @@ class MapVC: UIViewController {
         
         marker2.map = mapView
        
-        let urlString = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=\(camera2.target)&destinations=\(camera.target)&key=\(appKey)"
-        Alamofire.request(urlString!).responseJSON { (response) in
+        let urlString = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=\(camera2.target.latitude),\(camera2.target.longitude)&destinations=\(camera.target.latitude),\(camera.target.longitude)&sensor=true&mode=driving&key=\(appKey)"
+        Alamofire.request(urlString).responseJSON { (response) in
             print("je suis dans alamofire")
             if response.result.isSuccess {
                 print("je suis dans response succes")
                 let contenuJSON : JSON = JSON(response.result.value!)
-                self.contenu = self.lesCategories(contenuJSON)
-                self.maTable.reloadData()
+                //self.contenu = self.lesCategories(contenuJSON)
+                //self.maTable.reloadData()
                 print("résult value : \(response.result.value!)")
             }else{
                 print("Erreur : \(response.result.error!)")
